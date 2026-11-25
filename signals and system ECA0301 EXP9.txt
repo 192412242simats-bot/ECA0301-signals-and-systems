@@ -1,0 +1,51 @@
+% Experiment: Continuous-Time LTI System Analysis
+
+clc;
+clear;
+close all;
+
+% Define the Transfer Function
+num = [1];
+den = [1 2];
+sys = tf(num, den);
+
+% Display the Transfer Function
+disp('Transfer Function:');
+sys
+
+% Find and Display Poles
+disp('Poles:');
+disp(pole(sys));
+
+% Find and Display Zeros
+disp('Zeros:');
+disp(zero(sys));
+
+% Define the Time Range
+t = 0:0.01:5;
+
+% 1. Impulse Response
+figure;
+impulse(sys, t);
+grid on;
+title('Impulse Response');
+xlabel('Time (s)');
+ylabel('h(t)');
+
+% 2. Step Response
+figure;
+step(sys, t);
+grid on;
+title('Step Response');
+xlabel('Time (s)');
+ylabel('y(t)');
+
+% 3. Response to Input x(t) = sin(2t)u(t)
+x = sin(2*t);
+
+figure;
+lsim(sys, x, t);
+grid on;
+title('Response to sin(2t)u(t)');
+xlabel('Time (s)');
+ylabel('y(t)');
